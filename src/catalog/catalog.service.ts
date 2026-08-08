@@ -7,12 +7,14 @@ import { PrismaService } from '../prisma/prisma.service';
 import { GameRequest } from './dto/game-request.dto';
 import { GameResponse } from './dto/game-response.dto';
 import { UploadService } from '../upload/upload.service';
+import { StatisticService } from '../statistic/statistic.service';
 
 @Injectable()
 export class CatalogService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly uploadService: UploadService,
+    private readonly statisticService: StatisticService,
   ) {}
 
   async findAll(): Promise<GameResponse[]> {
@@ -87,6 +89,8 @@ export class CatalogService {
         developer,
       },
     });
+
+    await this.statisticService.updateUserStatistics(userId);
 
     await this.prismaService.userGame.create({
       data: {

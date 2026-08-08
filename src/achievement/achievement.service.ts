@@ -9,12 +9,14 @@ import { CollectType, Rarity } from '../../generated/prisma/enums';
 import { CreateAchievementDto } from './dto/achievement.dto';
 import { UploadService } from '../upload/upload.service';
 import { UpdateAchievementDto } from './dto/update-achievement.dto';
+import { StatisticService } from '../statistic/statistic.service';
 
 @Injectable()
 export class AchievementService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly uploadService: UploadService,
+    private readonly statisticService: StatisticService,
   ) {}
 
   async checkTimeBasedAchievements(
@@ -158,6 +160,8 @@ export class AchievementService {
       }
       return existing;
     }
+
+    await this.statisticService.updateUserStatistics(userId);
 
     return this.prismaService.achievement.create({
       data: {

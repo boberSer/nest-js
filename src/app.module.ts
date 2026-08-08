@@ -11,6 +11,8 @@ import { SubcategoryModule } from './subcategory/subcategory.module';
 import { FavoriteModule } from './favorite/favorite.module';
 import { SessionModule } from './session/session.module';
 import { AchievementModule } from './achievement/achievement.module';
+import { UserModule } from './user/user.module';
+import { StatisticModule } from './statistic/statistic.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { AchievementModule } from './achievement/achievement.module';
     FavoriteModule,
     SessionModule,
     AchievementModule,
+    UserModule,
+    StatisticModule,
   ],
   controllers: [AppController],
   providers: [AppService],

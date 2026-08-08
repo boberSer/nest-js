@@ -5,12 +5,14 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { AchievementService } from '../achievement/achievement.service';
+import { StatisticService } from '../statistic/statistic.service';
 
 @Injectable()
 export class SessionService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly achievementService: AchievementService,
+    private readonly statisticService: StatisticService,
   ) {}
 
   async start(userId: number, gameId: number, subcategoryId?: number) {
@@ -97,6 +99,8 @@ export class SessionService {
     if (subcategoryId) {
       await this.achievementService.checkCollectionAchievement(userId, gameId);
     }
+
+    await this.statisticService.updateUserStatistics(userId);
 
     return updated;
   }
