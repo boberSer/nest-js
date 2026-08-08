@@ -1,0 +1,431 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider     = "prisma-client"
+  output       = ".../../generated/prisma/client"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Privacy {
+  PUBLIC
+  FRIENDS_ONLY
+  PRIVATE
+
+  @@map("enum_privacy")
+}
+
+enum Rarity {
+  COMMON
+  RARE
+  EPIC
+  LEGENDARY
+
+  @@map("enum_rarity")
+}
+
+enum FriendStatus {
+  PENDING
+  ACCEPTED
+  BLOCKED
+
+  @@map("enum_friend_status")
+}
+
+enum CollectType {
+  TIME_BASED
+  ACTION_BASED
+  COLLECTION_BASED
+
+  @@map("enum_collect_type")
+}
+
+enum ActionType {
+  STARTED_GAME
+  GOT_ACHIEVEMENT
+  POSTED_MOMENT
+  ADDED_FRIEND
+  RATED_GAME
+
+  @@map("enum_action_type")
+}
+
+enum EntityType {
+  GAME
+  ACHIEVEMENT
+  MOMENT
+  FRIEND
+  REVIEW
+
+  @@map("enum_entity_type")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  username String @unique
+
+  email String @unique
+
+  password String
+
+  avatar String?
+
+  bio String?
+
+  profilePrivacy Privacy @default(PUBLIC)
+
+  notificationsEnabled Boolean @default(true)
+
+  discordWebhookUrl String?
+
+  blackListUsersIds Int[]
+
+  sentFriendRequests     Friend[] @relation("sentFriendRequests")
+  receivedFriendRequests Friend[] @relation("receivedFriendRequests")
+
+  sentMessages     Chat[] @relation("sentMessages")
+  receivedMessages Chat[] @relation("receivedMessages")
+
+  userGames    UserGame[]
+  favorites    Favorite[]
+  achievements Achievement[]
+  gameSessions GameSession[]
+  moments      Moment[]
+  momentLikes  MomentLike[]
+  reviews      Review[]
+  statistics   Statistic?
+  timelines    Timeline[]
+  challenges   Challenge[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+// Общий каталог игр (все пользователи видят одни и те же игры)
+model Game {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  coverImage  String?
+  genre       String?
+  description String?
+  developer   String?
+  releaseYear Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Связи
+  userGames     UserGame[]
+  subcategories Subcategory[]
+  achievements  Achievement[]
+  moments       Moment[]
+  reviews       Review[]
+  sessions      GameSession[]
+  challenges    Challenge[]
+  tags          GameTag[]
+
+  @@map("games")
+}
+
+model UserGame {
+  id       Int      @id @default(autoincrement())
+  userId   Int
+  gameId   Int
+  isActive Boolean  @default(true)
+  addedAt  DateTime @default(now())
+
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, gameId])
+  @@map("user_game")
+}
+
+model Subcategory {
+  id Int @id @default(autoincrement())
+
+  gameId Int
+
+  name String
+
+  type String
+
+  image String?
+
+  description String?
+
+  game         Game          @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  reviews      Review[]
+  achievements Achievement[]
+  gameSessions GameSession[]
+  moments      Moment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Favorite {
+  id Int @id @default(autoincrement())
+
+  userId Int
+
+  entityType String
+  entityId   Int
+
+  order Int?
+
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, entityId, entityType])
+}
+
+model Achievement {
+  id Int @id @default(autoincrement())
+
+  userId Int
+
+  gameId Int
+
+  subcategoryId Int?
+
+  title String
+
+  description String
+
+  icon String?
+
+  progress Int @default(0)
+
+  progressMax Int
+
+  isUnlocked Boolean @default(false)
+
+  rarity Rarity @default(COMMON)
+
+  type CollectType @default(TIME_BASED)
+
+  game        Game         @relation(fields: [gameId], references: [id])
+  user        User         @relation(fields: [userId], references: [id])
+  subcategory Subcategory? @relation(fields: [subcategoryId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GameSession {
+  id Int @id @default(autoincrement())
+
+  userId Int
+
+  gameId Int
+
+  subcategoryId Int?
+
+  startedAt DateTime
+  endedAt   DateTime?
+
+  durationMinutes Int? // конец минус старт
+
+  game        Game         @relation(fields: [gameId], references: [id])
+  user        User         @relation(fields: [userId], references: [id])
+  subcategory Subcategory? @relation(fields: [subcategoryId], references: [id])
+
+  @@map("game_session")
+}
+
+model Moment {
+  id Int @id @default(autoincrement())
+
+  userId Int
+
+  gameId Int
+
+  subcategoryId Int?
+
+  imageUrl String
+
+  caption String?
+
+  likes Int? @default(0)
+
+  game        Game         @relation(fields: [gameId], references: [id])
+  user        User         @relation(fields: [userId], references: [id])
+  subcategory Subcategory? @relation(fields: [subcategoryId], references: [id])
+
+  momentLikes MomentLike[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MomentLike {
+  id Int @id @default(autoincrement())
+
+  momentId Int
+
+  userId Int
+
+  user   User   @relation(fields: [userId], references: [id])
+  moment Moment @relation(fields: [momentId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([momentId, userId])
+  @@map("moment_like")
+}
+
+model Review {
+  id Int @id @default(autoincrement())
+
+  userId Int
+
+  gameId Int
+
+  subcategoryId Int?
+
+  rating Int @default(1)
+
+  comment String?
+
+  game        Game         @relation(fields: [gameId], references: [id])
+  user        User         @relation(fields: [userId], references: [id])
+  subcategory Subcategory? @relation(fields: [subcategoryId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, gameId, subcategoryId])
+}
+
+model Friend {
+  id Int @id @default(autoincrement())
+
+  userId Int
+
+  friendId Int
+
+  status FriendStatus @default(PENDING)
+
+  user   User @relation("sentFriendRequests", fields: [userId], references: [id])
+  friend User @relation("receivedFriendRequests", fields: [friendId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, friendId])
+}
+
+model Chat {
+  id Int @id @default(autoincrement())
+
+  senderId Int
+
+  receiverId Int
+
+  content String
+
+  isRead Boolean @default(false)
+
+  sender   User @relation("sentMessages", fields: [senderId], references: [id])
+  receiver User @relation("receivedMessages", fields: [receiverId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tag {
+  id Int @id @default(autoincrement())
+
+  name String
+
+  gameTags GameTag[]
+
+  createdAt DateTime @default(now())
+}
+
+model GameTag {
+  id Int @id @default(autoincrement())
+
+  gameId Int
+
+  tagId Int
+
+  tag  Tag  @relation(fields: [tagId], references: [id])
+  game Game @relation(fields: [gameId], references: [id])
+
+  @@map("game_tag")
+}
+
+model Statistic {
+  id Int @id @default(autoincrement())
+
+  userId Int @unique
+
+  totalHours Float
+
+  gameCount Int
+
+  achievementsCount Int
+
+  momentsCount Int
+
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Timeline {
+  id Int @id @default(autoincrement())
+
+  userId Int
+
+  actionType ActionType @default(STARTED_GAME)
+
+  entityType EntityType @default(GAME)
+
+  entityId Int
+
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Challenge {
+  id Int @id @default(autoincrement())
+
+  userId Int
+
+  gameId Int
+
+  title String
+
+  description String?
+
+  targetValue Int
+
+  currentValue Int @default(0)
+
+  deadline DateTime?
+
+  isCompleted Boolean @default(false)
+
+  completedAt DateTime?
+
+  game Game @relation(fields: [gameId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
