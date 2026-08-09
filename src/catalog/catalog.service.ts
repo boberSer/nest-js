@@ -23,6 +23,41 @@ export class CatalogService {
         subcategories: true,
         tags: true,
         reviews: true,
+        moments: {
+          select: {
+            id: true,
+            imageUrl: true,
+            caption: true,
+            likes: true,
+            createdAt: true,
+            user: {
+              select: {
+                id: true,
+                username: true,
+                avatar: true,
+              },
+            },
+            game: {
+              select: {
+                id: true,
+                name: true,
+                coverImage: true,
+              },
+            },
+            subcategory: {
+              select: {
+                id: true,
+                name: true,
+                type: true,
+              },
+            },
+            _count: {
+              select: {
+                momentLikes: true,
+              },
+            },
+          },
+        },
       },
     });
   }
@@ -36,6 +71,41 @@ export class CatalogService {
         subcategories: true,
         tags: true,
         reviews: true,
+        moments: {
+          select: {
+            id: true,
+            imageUrl: true,
+            caption: true,
+            likes: true,
+            createdAt: true,
+            user: {
+              select: {
+                id: true,
+                username: true,
+                avatar: true,
+              },
+            },
+            game: {
+              select: {
+                id: true,
+                name: true,
+                coverImage: true,
+              },
+            },
+            subcategory: {
+              select: {
+                id: true,
+                name: true,
+                type: true,
+              },
+            },
+            _count: {
+              select: {
+                momentLikes: true,
+              },
+            },
+          },
+        },
       },
     });
 

@@ -20,7 +20,9 @@ export class GameRequest {
   @IsString()
   @IsOptional()
   @ApiProperty({
-    example: 'https://promit.tomsk.ru',
+    type: 'string',
+    format: 'binary',
+    description: 'Файл изображения (JPG, PNG)',
   })
   coverImage?: string;
 

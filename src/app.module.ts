@@ -13,6 +13,8 @@ import { SessionModule } from './session/session.module';
 import { AchievementModule } from './achievement/achievement.module';
 import { UserModule } from './user/user.module';
 import { StatisticModule } from './statistic/statistic.module';
+import { ChallengeModule } from './challenge/challenge.module';
+import { MomentModule } from './moment/moment.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { StatisticModule } from './statistic/statistic.module';
     AchievementModule,
     UserModule,
     StatisticModule,
+    ChallengeModule,
+    MomentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -17,7 +17,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 
 @UseGuards(JwtGuard)
 @ApiBearerAuth()
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -37,7 +37,7 @@ export class UserController {
     return await this.userService.updateProfile(id, dto, file);
   }
 
-  @Get('profile/user/:id')
+  @Get('/:id')
   async getUser(@Param('id') id: number, @User('id') currentId: number) {
     return await this.userService.getUserById(id, currentId);
   }
