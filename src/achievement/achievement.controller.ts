@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
   Post,
   Put,
   UploadedFile,
@@ -19,7 +18,7 @@ import { CreateAchievementDto } from './dto/achievement.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UpdateAchievementDto } from './dto/update-achievement.dto';
 
-@Controller('achievement')
+@Controller('achievements')
 @UseGuards(JwtGuard)
 @ApiBearerAuth()
 export class AchievementController {

@@ -7,7 +7,7 @@ import { EndSessionDto, StartSessionDto } from './dto/session.dto';
 
 @UseGuards(JwtGuard)
 @ApiBearerAuth()
-@Controller('session')
+@Controller('sessions')
 export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
 

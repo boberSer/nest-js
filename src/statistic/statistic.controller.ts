@@ -6,7 +6,7 @@ import { ApiBearerAuth } from '@nestjs/swagger';
 
 @UseGuards(JwtGuard)
 @ApiBearerAuth()
-@Controller('statistic')
+@Controller('statistics')
 export class StatisticController {
   constructor(private readonly statisticService: StatisticService) {}
 

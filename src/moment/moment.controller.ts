@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Param,
   Post,
   UploadedFile,
   UseGuards,
@@ -15,7 +16,7 @@ import { JwtGuard } from '../auth/guards/auth.guard';
 
 @UseGuards(JwtGuard)
 @ApiBearerAuth()
-@Controller('moment')
+@Controller('moments')
 export class MomentController {
   constructor(private readonly momentService: MomentService) {}
 
@@ -28,5 +29,13 @@ export class MomentController {
     @UploadedFile() file?: Express.Multer.File,
   ) {
     return this.momentService.create(id, dto, file);
+  }
+
+  @Post('like/:momentId')
+  async likeMoment(
+    @User('id') id: number,
+    @Param('momentId') momentId: number,
+  ) {
+    return this.momentService.likeMoment(id, momentId);
   }
 }

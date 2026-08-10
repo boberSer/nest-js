@@ -110,7 +110,6 @@ model User {
   @@map("users")
 }
 
-// Общий каталог игр (все пользователи видят одни и те же игры)
 model Game {
   id          Int      @id @default(autoincrement())
   name        String   @unique
@@ -121,6 +120,8 @@ model Game {
   releaseYear Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  rating Float? @default(0)
 
   // Связи
   userGames     UserGame[]
@@ -234,7 +235,7 @@ model GameSession {
   startedAt DateTime
   endedAt   DateTime?
 
-  durationMinutes Int? // конец минус старт
+  durationMinutes Int?
 
   game        Game         @relation(fields: [gameId], references: [id])
   user        User         @relation(fields: [userId], references: [id])
@@ -346,7 +347,7 @@ model Chat {
 model Tag {
   id Int @id @default(autoincrement())
 
-  name String
+  name String @unique
 
   gameTags GameTag[]
 

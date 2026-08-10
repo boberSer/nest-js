@@ -9,7 +9,7 @@ import {
 import { JwtGuard } from '../auth/guards/auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
-@Controller('favorite')
+@Controller('favorites')
 @UseGuards(JwtGuard)
 @ApiBearerAuth()
 export class FavoriteController {

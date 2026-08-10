@@ -21,7 +21,16 @@ export class CatalogService {
     return this.prismaService.game.findMany({
       include: {
         subcategories: true,
-        tags: true,
+        tags: {
+          select: {
+            tag: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
         reviews: true,
         moments: {
           select: {
@@ -69,7 +78,16 @@ export class CatalogService {
       },
       include: {
         subcategories: true,
-        tags: true,
+        tags: {
+          select: {
+            tag: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
         reviews: true,
         moments: {
           select: {

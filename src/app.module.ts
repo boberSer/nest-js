@@ -15,6 +15,9 @@ import { UserModule } from './user/user.module';
 import { StatisticModule } from './statistic/statistic.module';
 import { ChallengeModule } from './challenge/challenge.module';
 import { MomentModule } from './moment/moment.module';
+import { FriendModule } from './friend/friend.module';
+import { ReviewModule } from './review/review.module';
+import { TagModule } from './tag/tag.module';
 
 @Module({
   imports: [
@@ -34,6 +37,9 @@ import { MomentModule } from './moment/moment.module';
     StatisticModule,
     ChallengeModule,
     MomentModule,
+    FriendModule,
+    ReviewModule,
+    TagModule,
   ],
   controllers: [AppController],
   providers: [AppService],

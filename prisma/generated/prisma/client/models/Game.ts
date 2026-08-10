@@ -29,11 +29,13 @@ export type AggregateGame = {
 export type GameAvgAggregateOutputType = {
   id: number | null
   releaseYear: number | null
+  rating: number | null
 }
 
 export type GameSumAggregateOutputType = {
   id: number | null
   releaseYear: number | null
+  rating: number | null
 }
 
 export type GameMinAggregateOutputType = {
@@ -46,6 +48,7 @@ export type GameMinAggregateOutputType = {
   releaseYear: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  rating: number | null
 }
 
 export type GameMaxAggregateOutputType = {
@@ -58,6 +61,7 @@ export type GameMaxAggregateOutputType = {
   releaseYear: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  rating: number | null
 }
 
 export type GameCountAggregateOutputType = {
@@ -70,6 +74,7 @@ export type GameCountAggregateOutputType = {
   releaseYear: number
   createdAt: number
   updatedAt: number
+  rating: number
   _all: number
 }
 
@@ -77,11 +82,13 @@ export type GameCountAggregateOutputType = {
 export type GameAvgAggregateInputType = {
   id?: true
   releaseYear?: true
+  rating?: true
 }
 
 export type GameSumAggregateInputType = {
   id?: true
   releaseYear?: true
+  rating?: true
 }
 
 export type GameMinAggregateInputType = {
@@ -94,6 +101,7 @@ export type GameMinAggregateInputType = {
   releaseYear?: true
   createdAt?: true
   updatedAt?: true
+  rating?: true
 }
 
 export type GameMaxAggregateInputType = {
@@ -106,6 +114,7 @@ export type GameMaxAggregateInputType = {
   releaseYear?: true
   createdAt?: true
   updatedAt?: true
+  rating?: true
 }
 
 export type GameCountAggregateInputType = {
@@ -118,6 +127,7 @@ export type GameCountAggregateInputType = {
   releaseYear?: true
   createdAt?: true
   updatedAt?: true
+  rating?: true
   _all?: true
 }
 
@@ -217,6 +227,7 @@ export type GameGroupByOutputType = {
   releaseYear: number | null
   createdAt: Date
   updatedAt: Date
+  rating: number | null
   _count: GameCountAggregateOutputType | null
   _avg: GameAvgAggregateOutputType | null
   _sum: GameSumAggregateOutputType | null
@@ -252,6 +263,7 @@ export type GameWhereInput = {
   releaseYear?: Prisma.IntNullableFilter<"Game"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Game"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Game"> | Date | string
+  rating?: Prisma.FloatNullableFilter<"Game"> | number | null
   userGames?: Prisma.UserGameListRelationFilter
   subcategories?: Prisma.SubcategoryListRelationFilter
   achievements?: Prisma.AchievementListRelationFilter
@@ -272,6 +284,7 @@ export type GameOrderByWithRelationInput = {
   releaseYear?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  rating?: Prisma.SortOrderInput | Prisma.SortOrder
   userGames?: Prisma.UserGameOrderByRelationAggregateInput
   subcategories?: Prisma.SubcategoryOrderByRelationAggregateInput
   achievements?: Prisma.AchievementOrderByRelationAggregateInput
@@ -295,6 +308,7 @@ export type GameWhereUniqueInput = Prisma.AtLeast<{
   releaseYear?: Prisma.IntNullableFilter<"Game"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Game"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Game"> | Date | string
+  rating?: Prisma.FloatNullableFilter<"Game"> | number | null
   userGames?: Prisma.UserGameListRelationFilter
   subcategories?: Prisma.SubcategoryListRelationFilter
   achievements?: Prisma.AchievementListRelationFilter
@@ -315,6 +329,7 @@ export type GameOrderByWithAggregationInput = {
   releaseYear?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  rating?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.GameCountOrderByAggregateInput
   _avg?: Prisma.GameAvgOrderByAggregateInput
   _max?: Prisma.GameMaxOrderByAggregateInput
@@ -335,6 +350,7 @@ export type GameScalarWhereWithAggregatesInput = {
   releaseYear?: Prisma.IntNullableWithAggregatesFilter<"Game"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Game"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Game"> | Date | string
+  rating?: Prisma.FloatNullableWithAggregatesFilter<"Game"> | number | null
 }
 
 export type GameCreateInput = {
@@ -346,6 +362,7 @@ export type GameCreateInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementCreateNestedManyWithoutGameInput
@@ -366,6 +383,7 @@ export type GameUncheckedCreateInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameUncheckedCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryUncheckedCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementUncheckedCreateNestedManyWithoutGameInput
@@ -385,6 +403,7 @@ export type GameUpdateInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUpdateManyWithoutGameNestedInput
@@ -405,6 +424,7 @@ export type GameUncheckedUpdateInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUncheckedUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUncheckedUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUncheckedUpdateManyWithoutGameNestedInput
@@ -425,6 +445,7 @@ export type GameCreateManyInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
 }
 
 export type GameUpdateManyMutationInput = {
@@ -436,6 +457,7 @@ export type GameUpdateManyMutationInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type GameUncheckedUpdateManyInput = {
@@ -448,6 +470,7 @@ export type GameUncheckedUpdateManyInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type GameCountOrderByAggregateInput = {
@@ -460,11 +483,13 @@ export type GameCountOrderByAggregateInput = {
   releaseYear?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
 }
 
 export type GameAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   releaseYear?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
 }
 
 export type GameMaxOrderByAggregateInput = {
@@ -477,6 +502,7 @@ export type GameMaxOrderByAggregateInput = {
   releaseYear?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
 }
 
 export type GameMinOrderByAggregateInput = {
@@ -489,11 +515,13 @@ export type GameMinOrderByAggregateInput = {
   releaseYear?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
 }
 
 export type GameSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   releaseYear?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
 }
 
 export type GameScalarRelationFilter = {
@@ -502,6 +530,14 @@ export type GameScalarRelationFilter = {
 }
 
 export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableFloatFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
   decrement?: number
@@ -630,6 +666,7 @@ export type GameCreateWithoutUserGamesInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   subcategories?: Prisma.SubcategoryCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementCreateNestedManyWithoutGameInput
   moments?: Prisma.MomentCreateNestedManyWithoutGameInput
@@ -649,6 +686,7 @@ export type GameUncheckedCreateWithoutUserGamesInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   subcategories?: Prisma.SubcategoryUncheckedCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementUncheckedCreateNestedManyWithoutGameInput
   moments?: Prisma.MomentUncheckedCreateNestedManyWithoutGameInput
@@ -683,6 +721,7 @@ export type GameUpdateWithoutUserGamesInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   subcategories?: Prisma.SubcategoryUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUpdateManyWithoutGameNestedInput
   moments?: Prisma.MomentUpdateManyWithoutGameNestedInput
@@ -702,6 +741,7 @@ export type GameUncheckedUpdateWithoutUserGamesInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   subcategories?: Prisma.SubcategoryUncheckedUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUncheckedUpdateManyWithoutGameNestedInput
   moments?: Prisma.MomentUncheckedUpdateManyWithoutGameNestedInput
@@ -720,6 +760,7 @@ export type GameCreateWithoutSubcategoriesInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementCreateNestedManyWithoutGameInput
   moments?: Prisma.MomentCreateNestedManyWithoutGameInput
@@ -739,6 +780,7 @@ export type GameUncheckedCreateWithoutSubcategoriesInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameUncheckedCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementUncheckedCreateNestedManyWithoutGameInput
   moments?: Prisma.MomentUncheckedCreateNestedManyWithoutGameInput
@@ -773,6 +815,7 @@ export type GameUpdateWithoutSubcategoriesInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUpdateManyWithoutGameNestedInput
   moments?: Prisma.MomentUpdateManyWithoutGameNestedInput
@@ -792,6 +835,7 @@ export type GameUncheckedUpdateWithoutSubcategoriesInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUncheckedUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUncheckedUpdateManyWithoutGameNestedInput
   moments?: Prisma.MomentUncheckedUpdateManyWithoutGameNestedInput
@@ -810,6 +854,7 @@ export type GameCreateWithoutAchievementsInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryCreateNestedManyWithoutGameInput
   moments?: Prisma.MomentCreateNestedManyWithoutGameInput
@@ -829,6 +874,7 @@ export type GameUncheckedCreateWithoutAchievementsInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameUncheckedCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryUncheckedCreateNestedManyWithoutGameInput
   moments?: Prisma.MomentUncheckedCreateNestedManyWithoutGameInput
@@ -863,6 +909,7 @@ export type GameUpdateWithoutAchievementsInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUpdateManyWithoutGameNestedInput
   moments?: Prisma.MomentUpdateManyWithoutGameNestedInput
@@ -882,6 +929,7 @@ export type GameUncheckedUpdateWithoutAchievementsInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUncheckedUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUncheckedUpdateManyWithoutGameNestedInput
   moments?: Prisma.MomentUncheckedUpdateManyWithoutGameNestedInput
@@ -900,6 +948,7 @@ export type GameCreateWithoutSessionsInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementCreateNestedManyWithoutGameInput
@@ -919,6 +968,7 @@ export type GameUncheckedCreateWithoutSessionsInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameUncheckedCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryUncheckedCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementUncheckedCreateNestedManyWithoutGameInput
@@ -953,6 +1003,7 @@ export type GameUpdateWithoutSessionsInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUpdateManyWithoutGameNestedInput
@@ -972,6 +1023,7 @@ export type GameUncheckedUpdateWithoutSessionsInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUncheckedUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUncheckedUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUncheckedUpdateManyWithoutGameNestedInput
@@ -990,6 +1042,7 @@ export type GameCreateWithoutMomentsInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementCreateNestedManyWithoutGameInput
@@ -1009,6 +1062,7 @@ export type GameUncheckedCreateWithoutMomentsInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameUncheckedCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryUncheckedCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementUncheckedCreateNestedManyWithoutGameInput
@@ -1043,6 +1097,7 @@ export type GameUpdateWithoutMomentsInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUpdateManyWithoutGameNestedInput
@@ -1062,6 +1117,7 @@ export type GameUncheckedUpdateWithoutMomentsInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUncheckedUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUncheckedUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUncheckedUpdateManyWithoutGameNestedInput
@@ -1080,6 +1136,7 @@ export type GameCreateWithoutReviewsInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementCreateNestedManyWithoutGameInput
@@ -1099,6 +1156,7 @@ export type GameUncheckedCreateWithoutReviewsInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameUncheckedCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryUncheckedCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementUncheckedCreateNestedManyWithoutGameInput
@@ -1133,6 +1191,7 @@ export type GameUpdateWithoutReviewsInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUpdateManyWithoutGameNestedInput
@@ -1152,6 +1211,7 @@ export type GameUncheckedUpdateWithoutReviewsInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUncheckedUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUncheckedUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUncheckedUpdateManyWithoutGameNestedInput
@@ -1170,6 +1230,7 @@ export type GameCreateWithoutTagsInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementCreateNestedManyWithoutGameInput
@@ -1189,6 +1250,7 @@ export type GameUncheckedCreateWithoutTagsInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameUncheckedCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryUncheckedCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementUncheckedCreateNestedManyWithoutGameInput
@@ -1223,6 +1285,7 @@ export type GameUpdateWithoutTagsInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUpdateManyWithoutGameNestedInput
@@ -1242,6 +1305,7 @@ export type GameUncheckedUpdateWithoutTagsInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUncheckedUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUncheckedUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUncheckedUpdateManyWithoutGameNestedInput
@@ -1260,6 +1324,7 @@ export type GameCreateWithoutChallengesInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementCreateNestedManyWithoutGameInput
@@ -1279,6 +1344,7 @@ export type GameUncheckedCreateWithoutChallengesInput = {
   releaseYear?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  rating?: number | null
   userGames?: Prisma.UserGameUncheckedCreateNestedManyWithoutGameInput
   subcategories?: Prisma.SubcategoryUncheckedCreateNestedManyWithoutGameInput
   achievements?: Prisma.AchievementUncheckedCreateNestedManyWithoutGameInput
@@ -1313,6 +1379,7 @@ export type GameUpdateWithoutChallengesInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUpdateManyWithoutGameNestedInput
@@ -1332,6 +1399,7 @@ export type GameUncheckedUpdateWithoutChallengesInput = {
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   userGames?: Prisma.UserGameUncheckedUpdateManyWithoutGameNestedInput
   subcategories?: Prisma.SubcategoryUncheckedUpdateManyWithoutGameNestedInput
   achievements?: Prisma.AchievementUncheckedUpdateManyWithoutGameNestedInput
@@ -1445,6 +1513,7 @@ export type GameSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   releaseYear?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  rating?: boolean
   userGames?: boolean | Prisma.Game$userGamesArgs<ExtArgs>
   subcategories?: boolean | Prisma.Game$subcategoriesArgs<ExtArgs>
   achievements?: boolean | Prisma.Game$achievementsArgs<ExtArgs>
@@ -1466,6 +1535,7 @@ export type GameSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   releaseYear?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  rating?: boolean
 }, ExtArgs["result"]["game"]>
 
 export type GameSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1478,6 +1548,7 @@ export type GameSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   releaseYear?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  rating?: boolean
 }, ExtArgs["result"]["game"]>
 
 export type GameSelectScalar = {
@@ -1490,9 +1561,10 @@ export type GameSelectScalar = {
   releaseYear?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  rating?: boolean
 }
 
-export type GameOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "coverImage" | "genre" | "description" | "developer" | "releaseYear" | "createdAt" | "updatedAt", ExtArgs["result"]["game"]>
+export type GameOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "coverImage" | "genre" | "description" | "developer" | "releaseYear" | "createdAt" | "updatedAt" | "rating", ExtArgs["result"]["game"]>
 export type GameInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userGames?: boolean | Prisma.Game$userGamesArgs<ExtArgs>
   subcategories?: boolean | Prisma.Game$subcategoriesArgs<ExtArgs>
@@ -1529,6 +1601,7 @@ export type $GamePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     releaseYear: number | null
     createdAt: Date
     updatedAt: Date
+    rating: number | null
   }, ExtArgs["result"]["game"]>
   composites: {}
 }
@@ -1969,6 +2042,7 @@ export interface GameFieldRefs {
   readonly releaseYear: Prisma.FieldRef<"Game", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Game", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Game", 'DateTime'>
+  readonly rating: Prisma.FieldRef<"Game", 'Float'>
 }
     
 

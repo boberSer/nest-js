@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -61,6 +62,19 @@ export class MomentService {
     });
 
     if (!moment) throw new NotFoundException('Момент не найден');
+
+    const existingLike = await this.prismaService.momentLike.findUnique({
+      where: {
+        momentId_userId: {
+          momentId,
+          userId,
+        },
+      },
+    });
+
+    if (existingLike) {
+      throw new ConflictException('Вы уже поставили лайк этому моменту');
+    }
 
     return this.prismaService.momentLike.create({
       data: {

@@ -113,7 +113,8 @@ export const GameScalarFieldEnum = {
   developer: 'developer',
   releaseYear: 'releaseYear',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  rating: 'rating'
 } as const
 
 export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
