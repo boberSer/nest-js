@@ -4,10 +4,15 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { TimelineService } from '../timeline/timeline.service';
+import { ActionType, EntityType } from '../../generated/prisma/enums';
 
 @Injectable()
 export class FriendService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly timelineService: TimelineService,
+  ) {}
 
   async sendFriendRequest(userId: number, friendId: number) {
     if (userId === friendId)
@@ -62,6 +67,13 @@ export class FriendService {
         status: 'ACCEPTED',
       },
     });
+
+    await this.timelineService.createEvent(
+      userId,
+      friendId,
+      ActionType.ADDED_FRIEND,
+      EntityType.FRIEND,
+    );
 
     return { message: 'Заявка на дружбу одобрена' };
   }

@@ -62,7 +62,8 @@ export const EntityType = {
   ACHIEVEMENT: 'ACHIEVEMENT',
   MOMENT: 'MOMENT',
   FRIEND: 'FRIEND',
-  REVIEW: 'REVIEW'
+  REVIEW: 'REVIEW',
+  CHALLENGE: 'CHALLENGE'
 } as const
 
 export type EntityType = (typeof EntityType)[keyof typeof EntityType]

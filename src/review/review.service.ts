@@ -2,10 +2,15 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { ReviewResponseDto } from './dto/review-response.dto';
+import { TimelineService } from '../timeline/timeline.service';
+import { ActionType, EntityType } from '../../generated/prisma/enums';
 
 @Injectable()
 export class ReviewService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly timelineService: TimelineService,
+  ) {}
 
   private async updateGameRating(gameId: number) {
     const result = await this.prismaService.review.aggregate({
@@ -72,6 +77,12 @@ export class ReviewService {
     }
 
     await this.updateGameRating(gameId);
+    await this.timelineService.createEvent(
+      userId,
+      review.id,
+      ActionType.RATED_GAME,
+      EntityType.REVIEW,
+    );
 
     return review;
   }

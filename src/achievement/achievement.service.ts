@@ -5,11 +5,21 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CollectType, Rarity } from '../../generated/prisma/enums';
+import {
+  ActionType,
+  CollectType,
+  EntityType,
+  Rarity,
+} from '../../generated/prisma/enums';
 import { CreateAchievementDto } from './dto/achievement.dto';
 import { UploadService } from '../upload/upload.service';
 import { UpdateAchievementDto } from './dto/update-achievement.dto';
 import { StatisticService } from '../statistic/statistic.service';
+import { TimelineService } from '../timeline/timeline.service';
+import {
+  DiscordNotificationType,
+  DiscordService,
+} from '../discord/discord.service';
 
 @Injectable()
 export class AchievementService {
@@ -17,6 +27,8 @@ export class AchievementService {
     private readonly prismaService: PrismaService,
     private readonly uploadService: UploadService,
     private readonly statisticService: StatisticService,
+    private readonly timelineService: TimelineService,
+    private readonly discordService: DiscordService,
   ) {}
 
   async checkTimeBasedAchievements(
@@ -133,6 +145,9 @@ export class AchievementService {
         type: CollectType.COLLECTION_BASED,
       },
     };
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
 
     const template = templates[typeKey];
     if (!template) {
@@ -158,12 +173,27 @@ export class AchievementService {
           },
         });
       }
+      await this.discordService.send(DiscordNotificationType.ACHIEVEMENT, {
+        title: '🏆 Получено новое достижение!',
+        description: `Игрок **@${user?.username}** разблокировал ачивку!`,
+        color: 15844367, // Золотой/Желтый цвет
+        fields: [
+          {
+            name: 'Название',
+            value: existing.title || 'Секретная ачивка',
+            inline: true,
+          },
+          {
+            name: 'Описание',
+            value: existing.description || 'Нет описания',
+            inline: false,
+          },
+        ],
+      });
       return existing;
     }
 
-    await this.statisticService.updateUserStatistics(userId);
-
-    return this.prismaService.achievement.create({
+    const achievement = await this.prismaService.achievement.create({
       data: {
         userId,
         gameId,
@@ -180,6 +210,33 @@ export class AchievementService {
         icon: this.getIconForAchievement(typeKey),
       },
     });
+
+    await this.statisticService.updateUserStatistics(userId);
+    await this.timelineService.createEvent(
+      userId,
+      achievement.id,
+      ActionType.GOT_ACHIEVEMENT,
+      EntityType.ACHIEVEMENT,
+    );
+    await this.discordService.send(DiscordNotificationType.ACHIEVEMENT, {
+      title: '🏆 Получено новое достижение!',
+      description: `Игрок **@${user?.username}** разблокировал ачивку!`,
+      color: 15844367, // Золотой/Желтый цвет
+      fields: [
+        {
+          name: 'Название',
+          value: achievement.title || 'Секретная ачивка',
+          inline: true,
+        },
+        {
+          name: 'Описание',
+          value: achievement.description || 'Нет описания',
+          inline: false,
+        },
+      ],
+    });
+
+    return achievement;
   }
 
   private getIconForAchievement(type: string): string {

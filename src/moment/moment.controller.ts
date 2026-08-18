@@ -1,6 +1,6 @@
 import {
   Body,
-  Controller,
+  Controller, Get,
   Param,
   Post,
   UploadedFile,
@@ -37,5 +37,10 @@ export class MomentController {
     @Param('momentId') momentId: number,
   ) {
     return this.momentService.likeMoment(id, momentId);
+  }
+
+  @Get('library')
+  async getMoments() {
+    return this.momentService.getMoments();
   }
 }

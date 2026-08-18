@@ -18,6 +18,8 @@ import { MomentModule } from './moment/moment.module';
 import { FriendModule } from './friend/friend.module';
 import { ReviewModule } from './review/review.module';
 import { TagModule } from './tag/tag.module';
+import { TimelineModule } from './timeline/timeline.module';
+import { DiscordModule } from './discord/discord.module';
 
 @Module({
   imports: [
@@ -40,6 +42,8 @@ import { TagModule } from './tag/tag.module';
     FriendModule,
     ReviewModule,
     TagModule,
+    TimelineModule,
+    DiscordModule,
   ],
   controllers: [AppController],
   providers: [AppService],

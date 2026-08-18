@@ -1,4 +1,4 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsOptional, IsEmail, IsUrl, IsEnum } from 'class-validator';
 import { Privacy } from '../../../generated/prisma/enums';
 import { Transform } from 'class-transformer';
@@ -20,9 +20,10 @@ export class UpdateUserDto {
   @IsEmail()
   email?: string;
 
-  @ApiPropertyOptional({
-    description: 'Аватар (URL)',
-    example: 'https://example.com/avatar.jpg',
+  @ApiProperty({
+    type: 'string',
+    format: 'binary',
+    description: 'Файл изображения (JPG, PNG)',
   })
   @IsOptional()
   @IsUrl()

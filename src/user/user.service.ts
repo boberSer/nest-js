@@ -220,6 +220,13 @@ export class UserService {
 
     if (!user) throw new NotFoundException('Пользователь не найден');
 
+    if (user.id === currentUserId) {
+      return {
+        message: 'Это ваш профиль',
+        data: user,
+      };
+    }
+
     if (user.profilePrivacy === 'PRIVATE')
       throw new ForbiddenException('Пользователь находится в приватном режиме');
 
@@ -235,15 +242,6 @@ export class UserService {
           ],
         },
       });
-
-      console.log(
-        'currentUserId',
-        currentUserId,
-        'isFriend',
-        isFriend,
-        'userId',
-        userId,
-      );
 
       if (!isFriend)
         throw new ForbiddenException('Профиль доступен только друзьям');

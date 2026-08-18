@@ -7,12 +7,20 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { UploadService } from '../upload/upload.service';
 import { CreateMomentDto } from './dto/create-moment.dto';
+import { TimelineService } from '../timeline/timeline.service';
+import { ActionType, EntityType } from '../../generated/prisma/enums';
+import {
+  DiscordNotificationType,
+  DiscordService,
+} from '../discord/discord.service';
 
 @Injectable()
 export class MomentService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly uploadService: UploadService,
+    private readonly timelineService: TimelineService,
+    private readonly discordService: DiscordService,
   ) {}
 
   async create(
@@ -24,6 +32,10 @@ export class MomentService {
 
     const game = await this.prismaService.game.findUnique({
       where: { id: gameId },
+    });
+
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
     });
 
     if (!game) throw new NotFoundException('Игра не найдена');
@@ -45,7 +57,7 @@ export class MomentService {
     const uploadResult = this.uploadService.upload(file, 'moments');
     const imageUrl = uploadResult.path;
 
-    return this.prismaService.moment.create({
+    const moment = await this.prismaService.moment.create({
       data: {
         userId,
         gameId,
@@ -54,6 +66,32 @@ export class MomentService {
         caption,
       },
     });
+
+    await this.timelineService.createEvent(
+      userId,
+      moment.id,
+      ActionType.POSTED_MOMENT,
+      EntityType.MOMENT,
+    );
+
+    const baseUrl = process.env.SITE_URL
+      ? process.env.SITE_URL.replace(/\/$/, '')
+      : null;
+
+    let discordImageUrl: string | undefined = undefined;
+
+    if (baseUrl && moment.imageUrl) {
+      discordImageUrl = `${baseUrl}${moment.imageUrl}`;
+    }
+
+    await this.discordService.send(DiscordNotificationType.MOMENT, {
+      title: '📸 Новый момент в галерее',
+      description: `Пользователь **@${user?.username || 'Аноним'}** поделился снимком.\n\n**Описание:** ${moment.caption || 'Без описания.'} \n\n **Название игры:** ${game.name}`,
+      color: 3447003,
+      image: discordImageUrl ? { url: discordImageUrl } : undefined,
+    });
+
+    return moment;
   }
 
   async likeMoment(userId: number, momentId: number) {
@@ -82,5 +120,9 @@ export class MomentService {
         userId,
       },
     });
+  }
+
+  async getMoments() {
+    return this.prismaService.moment.findMany({});
   }
 }

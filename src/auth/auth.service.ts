@@ -13,6 +13,10 @@ import { isDev } from '../utils/is-dev.utils';
 import { JwtPayload } from './interfaces/jwt.interface';
 import { ConflictException } from '@nestjs/common';
 import { LoginRequest } from './dto/login.dto';
+import {
+  DiscordNotificationType,
+  DiscordService,
+} from '../discord/discord.service';
 
 @Injectable()
 class AuthService {
@@ -24,6 +28,7 @@ class AuthService {
     private readonly prismaService: PrismaService,
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
+    private readonly discordService: DiscordService,
   ) {
     this.JWT_ACCESS_TOKEN_TTL = configService.getOrThrow<string>(
       'JWT_ACCESS_TOKEN_TTL',
@@ -52,6 +57,16 @@ class AuthService {
         email,
         password: await bcrypt.hash(password, 10),
       },
+    });
+
+    await this.discordService.send(DiscordNotificationType.REGISTRATION, {
+      title: '🆕 Новый пользователь на сайте!',
+      description: `Пользователь **@${user.username}** успешно зарегистрировался.`,
+      color: 3066993, // Зеленый цвет боковой полоски
+      fields: [
+        { name: 'Email', value: user.email, inline: true },
+        { name: 'ID на сайте', value: String(user.id), inline: true },
+      ],
     });
 
     return this.auth(res, user.id);

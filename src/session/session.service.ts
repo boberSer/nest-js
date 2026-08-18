@@ -6,6 +6,8 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { AchievementService } from '../achievement/achievement.service';
 import { StatisticService } from '../statistic/statistic.service';
+import { TimelineService } from '../timeline/timeline.service';
+import { ActionType, EntityType } from '../../generated/prisma/enums';
 
 @Injectable()
 export class SessionService {
@@ -13,6 +15,7 @@ export class SessionService {
     private readonly prismaService: PrismaService,
     private readonly achievementService: AchievementService,
     private readonly statisticService: StatisticService,
+    private readonly timelineService: TimelineService,
   ) {}
 
   async start(userId: number, gameId: number, subcategoryId?: number) {
@@ -43,6 +46,13 @@ export class SessionService {
       throw new ConflictException(
         'У вас уже есть активная сессия для этой игры',
       );
+
+    await this.timelineService.createEvent(
+      userId,
+      gameId,
+      ActionType.STARTED_GAME,
+      EntityType.GAME,
+    );
 
     return this.prismaService.gameSession.create({
       data: {

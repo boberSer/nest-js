@@ -4,12 +4,16 @@ import { ConfigService } from '@nestjs/config';
 import cookieParser from 'cookie-parser';
 import { ValidationPipe } from '@nestjs/common';
 import { setupSwagger } from './utils/swagger.util';
+import express from 'express';
+import path from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService);
 
   app.use(cookieParser());
+
+  app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
   app.setGlobalPrefix('api');
 

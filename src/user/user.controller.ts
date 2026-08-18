@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -26,7 +27,7 @@ export class UserController {
     return await this.userService.getProfile(id);
   }
 
-  @Post('profile')
+  @Put('profile')
   @UseInterceptors(FileInterceptor('avatar'))
   @ApiConsumes('multipart/form-data')
   async updateProfile(
