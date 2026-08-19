@@ -20,6 +20,7 @@ import { ReviewModule } from './review/review.module';
 import { TagModule } from './tag/tag.module';
 import { TimelineModule } from './timeline/timeline.module';
 import { DiscordModule } from './discord/discord.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { DiscordModule } from './discord/discord.module';
     TagModule,
     TimelineModule,
     DiscordModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -6,12 +6,14 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { TimelineService } from '../timeline/timeline.service';
 import { ActionType, EntityType } from '../../generated/prisma/enums';
+import { DiscordService } from '../discord/discord.service';
 
 @Injectable()
 export class FriendService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly timelineService: TimelineService,
+    private readonly discordService: DiscordService,
   ) {}
 
   async sendFriendRequest(userId: number, friendId: number) {
@@ -47,6 +49,30 @@ export class FriendService {
       },
     });
 
+    try {
+      // Достаем отправителя (userId), чтобы взять его ник, и получателя (friendId), чтобы взять его вебхук
+      const sender = await this.prismaService.user.findUnique({
+        where: { id: userId },
+      });
+      const receiver = await this.prismaService.user.findUnique({
+        where: { id: friendId },
+      });
+
+      // Если у получателя включены уведомления и привязан вебхук — шлем сообщение
+      if (receiver?.notificationsEnabled && receiver?.discordWebhookUrl) {
+        await this.discordService.sendToUserWebhook(
+          receiver.discordWebhookUrl,
+          {
+            title: '🤝 Новая заявка в друзья!',
+            description: `Пользователь **@${sender?.username || 'Аноним'}** хочет добавить вас в друзья на сайте.`,
+            color: 3447003, // Синий цвет
+          },
+        );
+      }
+    } catch (err) {
+      console.error('Ошибка Дискорда при запросе дружбы:', err.message);
+    }
+
     return { message: 'Заявка на дружбу отправлена' };
   }
 
@@ -74,6 +100,26 @@ export class FriendService {
       ActionType.ADDED_FRIEND,
       EntityType.FRIEND,
     );
+
+    try {
+      // Пользователь, который принял — это userId. Изначальный отправитель — это friendId.
+      const accepter = await this.prismaService.user.findUnique({
+        where: { id: userId },
+      });
+      const sender = await this.prismaService.user.findUnique({
+        where: { id: friendId },
+      });
+
+      if (sender?.notificationsEnabled && sender?.discordWebhookUrl) {
+        await this.discordService.sendToUserWebhook(sender.discordWebhookUrl, {
+          title: '🎉 Заявка в друзья принята!',
+          description: `Пользователь **@${accepter?.username || 'Аноним'}** одобрил вашу заявку. Теперь вы друзья!`,
+          color: 5763719, // Зеленый цвет
+        });
+      }
+    } catch (err) {
+      console.error('Ошибка Дискорда при одобрении дружбы:', err.message);
+    }
 
     return { message: 'Заявка на дружбу одобрена' };
   }
