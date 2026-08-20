@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7493fd67-e44b-48a5-8090-84e6262a6df6" name="Changes" comment="env fix" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/backend" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;boberSer&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/boberSer/nest-js.git&quot;,
+    &quot;accountId&quot;: &quot;5a6e3901-3859-4de0-a77a-cebad924f5e3&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="3HiqeDA4GqeWm668ihGKUEyjfQy" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/danila/WebstormProjects/big-ass/src/chat&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/danila/WebstormProjects/big-ass/node_modules/prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/danila/WebstormProjects/big-ass/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/chat" />
+      <recent name="$PROJECT_DIR$/src/review" />
+      <recent name="$PROJECT_DIR$/src/friend" />
+      <recent name="$PROJECT_DIR$/src/moment" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.143" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7493fd67-e44b-48a5-8090-84e6262a6df6" name="Changes" comment="" />
+      <created>1786361331246</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1786361331246</updated>
+      <workItem from="1786361334033" duration="6124000" />
+      <workItem from="1786523167455" duration="5793000" />
+      <workItem from="1787028166316" duration="352000" />
+      <workItem from="1787032761685" duration="16817000" />
+      <workItem from="1787126420702" duration="10115000" />
+      <workItem from="1787212011651" duration="434000" />
+    </task>
+    <task id="LOCAL-00001" summary="friend, moment, review, tag модули">
+      <option name="closed" value="true" />
+      <created>1786382601369</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1786382601369</updated>
+    </task>
+    <task id="LOCAL-00002" summary="интеграция с дискордом, челенджи полностью">
+      <option name="closed" value="true" />
+      <created>1787064923649</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1787064923649</updated>
+    </task>
+    <task id="LOCAL-00003" summary="работа с пользовательскими вебхуками дискорда, чат 1:1. Готовый бэк, нуждающийся в тестировании">
+      <option name="closed" value="true" />
+      <created>1787137092364</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1787137092364</updated>
+    </task>
+    <task id="LOCAL-00004" summary="env fix">
+      <option name="closed" value="true" />
+      <created>1787137326198</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1787137326198</updated>
+    </task>
+    <task id="LOCAL-00005" summary="env fix">
+      <option name="closed" value="true" />
+      <created>1787212195758</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1787212195758</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="friend, moment, review, tag модули" />
+    <MESSAGE value="интеграция с дискордом, челенджи полностью" />
+    <MESSAGE value="работа с пользовательскими вебхуками дискорда, чат 1:1. Готовый бэк, нуждающийся в тестировании" />
+    <MESSAGE value="env fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="env fix" />
+  </component>
+</project>
